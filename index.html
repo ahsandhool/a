@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert your MP4 video files to MP3 audio easily and quickly online." />
+    <title>MP4 to MP3 Converter</title>
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 font-roboto">
+    <!-- Header -->
+    <header class="bg-green-600 text-white p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold">MP4 to MP3 Converter</h1>
+        <nav>
+          <ul class="flex space-x-4">
+            <li><a href="#" class="hover:underline">Home</a></li>
+            <li><a href="#" class="hover:underline">About</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4">
+      <!-- Upload Section -->
+      <section class="bg-white p-6 rounded-lg shadow-lg mt-6">
+        <h2 class="text-xl font-bold mb-4">Convert your MP4 files to MP3</h2>
+        <form class="space-y-4" id="uploadForm">
+          <div>
+            <label
+              for="file-upload"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Upload MP4 File
+            </label>
+            <input
+              type="file"
+              id="file-upload"
+              accept="video/mp4"
+              class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+            />
+          </div>
+          <button
+            type="button"
+            onclick="uploadFile()"
+            class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:ring-2 focus:ring-green-500"
+          >
+            Convert
+          </button>
+        </form>
+        <p id="status" class="mt-4 text-gray-700 text-sm"></p>
+      </section>
+
+      <!-- Recent Conversions -->
+      <section class="mt-8">
+        <h2 class="text-xl font-bold mb-4">Recent Conversions</h2>
+        <ul id="recent-files" class="space-y-4">
+          <!-- Dynamically generated content -->
+        </ul>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-600 text-white p-4 mt-8">
+      <div class="container mx-auto text-center">
+        <p>© 2024 MP4 to MP3 Converter. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Simulated API Interaction for File Upload
+      function uploadFile() {
+        const fileInput = document.getElementById("file-upload");
+        const status = document.getElementById("status");
+        if (fileInput.files.length === 0) {
+          status.textContent = "Please upload an MP4 file.";
+          return;
+        }
+
+        status.textContent = "Converting... Please wait.";
+
+        // Simulate a delay and update the recent conversions list
+        setTimeout(() => {
+          const fileName = fileInput.files[0].name;
+          addRecentFile(fileName);
+          status.textContent = "File converted successfully! 🎉";
+        }, 2000);
+      }
+
+      // Add file to Recent Conversions
+      function addRecentFile(fileName) {
+        const recentFiles = document.getElementById("recent-files");
+        const listItem = document.createElement("li");
+        listItem.className =
+          "bg-white p-4 rounded-lg shadow-lg flex justify-between items-center";
+
+        listItem.innerHTML = `
+          <div>
+            <p class="font-bold">${fileName}</p>
+            <p class="text-sm text-gray-600">Just now</p>
+          </div>
+          <a href="#" class="text-green-600 hover:underline">Download MP3</a>
+        `;
+        recentFiles.prepend(listItem);
+      }
+    </script>
+  </body>
+</html>
